@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //Task 1
+
+        //Task 2
         int[] intArray;
         int sumIndex = 0;
         int countNegative = 0;
@@ -35,6 +36,34 @@ public class Main {
         System.out.println("Сума індексів додатних елементів: " + sumIndex);
         System.out.println("Кількість непарних від'ємних елементів масиву: " + countNegative);
 
+        //Task 3
+        System.out.print("Введіть кількість точок: ");
+        int n = scanner.nextInt();
+        int[][] points = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Введіть координати x для точки " + (i + 1) + ": ");
+            points[i][0] = scanner.nextInt();
 
+            System.out.print("Введіть координати y для точки " + (i + 1) + ": ");
+            points[i][1] = scanner.nextInt();
+        }
+        int maxDistance = 0;
+        int point1Index = 0, point2Index = 0;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int distance = calculateDistance(points[i][0], points[i][1], points[j][0], points[j][1]);
+                if (distance > maxDistance) {
+                    maxDistance = distance;
+                    point1Index = i;
+                    point2Index = j;
+                }
+            }
+        }
+        System.out.println("Максимальна відстань між точками: " + maxDistance);
+        System.out.println("Пара точок: (" + points[point1Index][0] + ", " + points[point1Index][1] + ") і ("
+                + points[point2Index][0] + ", " + points[point2Index][1] + ")");
+    }
+    private static int calculateDistance(int x1, int y1, int x2, int y2) {
+        return (int) Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 }
